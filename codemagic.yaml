@@ -1,0 +1,18 @@
+workflows:
+  macos-swift-build:
+    name: macOS Swift Build
+    environment:
+      xcode: latest  # or specify a version like 15.0 if needed
+    scripts:
+      - name: Install CocoaPods dependencies (optional)
+        script: |
+          pod install  # If you are using CocoaPods for dependencies
+      - name: Build macOS app using Xcode
+        script: |
+          xcodebuild -workspace MyApp.xcworkspace \
+                     -scheme MyApp \
+                     -sdk macosx \
+                     -configuration Release \
+                     -derivedDataPath build
+    artifacts:
+      - build/Release/MyApp.app  # Path to the built app
